@@ -11,9 +11,7 @@ namespace SalesWebMvc.Models {
         public DateTime BirthDate { get; set; }
         public Department Department { get; set; }
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
-
-        public Seller() { }
-
+       
         public Seller(int id, string name, string email, double baseSalary, DateTime birthDate, Department department) {
             Id = id;
             Name = name;
@@ -21,6 +19,9 @@ namespace SalesWebMvc.Models {
             BaseSalary = baseSalary;
             BirthDate = birthDate;
             Department = department;
+        }
+
+        public Seller(int v1, string v2, string v3, DateTime dateTime, double v4, Department d1) {
         }
 
         public void AddSales(SalesRecord sr) 

@@ -32,7 +32,7 @@ namespace SalesWebMvc {
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<SalesWebMvcContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("SalesWebMvcContext"), builder =>
@@ -42,7 +42,7 @@ namespace SalesWebMvc {
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingServirce seedingServirce) {
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, SeedingServirce seedingServirce) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
                 seedingServirce.Seed();
