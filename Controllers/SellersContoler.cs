@@ -4,12 +4,12 @@ using SalesWebMvc.Models;
 using SalesWebMvc.Models.ViewModels;
 
 namespace SalesWebMvc.Controllers {
-    public class SellersContolers : Controller {
+    public class SellersContoler : Controller {
 
         private readonly SellerService _sellerService;
         private readonly DepartmentService _departmentService;
 
-        public SellersContolers(SellerService sellerService, DepartmentService departmentService) {
+        public SellersContoler(SellerService sellerService, DepartmentService departmentService) {
             _sellerService = sellerService;
             _departmentService = departmentService;
         }
@@ -29,6 +29,28 @@ namespace SalesWebMvc.Controllers {
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
 
+        }
+
+        public IActionResult Delete(int? id) {
+            if (id == null) {
+                return NotFound();
+            }
+            var obj = _sellerService.FindById(id.Value);
+            if (obj == null) {
+                return NotFound();
+            }
+            return View(obj);
+        }
+
+        public IActionResult Details(int id) {
+            if (id == null) {
+                return NotFound();
+            }
+            var obj = _sellerService.FindById(id.Value);
+            if (obj == null) {
+                return NotFound();
+            }
+            return View(obj);
         }
 
     }
