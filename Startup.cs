@@ -33,7 +33,7 @@ namespace SalesWebMvc {
             });
 
 
-            _ = services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            _ = services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddDbContext<SalesWebMvcContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("SalesWebMvcContext"), builder =>
