@@ -9,6 +9,7 @@ using SalesWebMvc.Models.ViewModels;
 using SalesWebMvc.Models.ViewModers;
 using SalesWebMvc.Services;
 using Microsoft.EntityFrameworkCore;
+using SalesWebMvc.Services.Exception;
 
 namespace SalesWebMvc.Controllers {
     public class SellersController : Controller {
@@ -59,8 +60,13 @@ namespace SalesWebMvc.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id) {
-            await _sellerService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try {
+                await _sellerService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException e) {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
         public async Task<IActionResult> Details(int? id) {
